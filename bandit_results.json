@@ -1,0 +1,234 @@
+{
+  "errors": [],
+  "generated_at": "2026-04-19T14:31:50Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 5,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 4,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 3,
+      "SEVERITY.LOW": 4,
+      "SEVERITY.MEDIUM": 3,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 108,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py": {
+      "CONFIDENCE.HIGH": 5,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 4,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 3,
+      "SEVERITY.LOW": 4,
+      "SEVERITY.MEDIUM": 3,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 108,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "11 import os\n12 import subprocess\n13 import pickle\n",
+      "col_offset": 0,
+      "end_col_offset": 17,
+      "filename": "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with the subprocess module.",
+      "line_number": 12,
+      "line_range": [
+        12
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess",
+      "test_id": "B404",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "12 import subprocess\n13 import pickle\n14 import hashlib\n",
+      "col_offset": 0,
+      "end_col_offset": 13,
+      "filename": "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 502,
+        "link": "https://cwe.mitre.org/data/definitions/502.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with pickle module.",
+      "line_number": 13,
+      "line_range": [
+        13
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b403-import-pickle",
+      "test_id": "B403",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "19 # \u2500\u2500\u2500 VULNERABILITY 1: Hard-coded secret key \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n20 app.secret_key = \"supersecret123\"          # CWE-798\n21 \n",
+      "col_offset": 17,
+      "end_col_offset": 33,
+      "filename": "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'supersecret123'",
+      "line_number": 20,
+      "line_range": [
+        20
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "23 DB_PATH = \"users.db\"                       # CWE-259\n24 ADMIN_PASSWORD = \"admin123\"                # CWE-798\n25 \n",
+      "col_offset": 17,
+      "end_col_offset": 27,
+      "filename": "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'admin123'",
+      "line_number": 24,
+      "line_range": [
+        24
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "67         # Direct string interpolation \u2192 SQL injection (CWE-89)\n68         query = f\"SELECT * FROM users WHERE username='{username}' AND password='{password}'\"\n69         cur = db.execute(query)\n",
+      "col_offset": 18,
+      "end_col_offset": 54,
+      "filename": "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 68,
+      "line_range": [
+        68
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "123     # Unsanitised user input passed to shell (CWE-78)\n124     result = subprocess.check_output(f\"ping -c 1 {host}\", shell=True, text=True)\n125     return f\"<pre>{result}</pre>\"\n",
+      "col_offset": 13,
+      "end_col_offset": 80,
+      "filename": "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "HIGH",
+      "issue_text": "subprocess call with shell=True identified, security issue.",
+      "line_number": 124,
+      "line_range": [
+        124
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b602_subprocess_popen_with_shell_equals_true.html",
+      "test_id": "B602",
+      "test_name": "subprocess_popen_with_shell_equals_true"
+    },
+    {
+      "code": "132     data = request.data\n133     profile = pickle.loads(data)\n134     return f\"Profile loaded: {profile}\"\n",
+      "col_offset": 14,
+      "end_col_offset": 32,
+      "filename": "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 502,
+        "link": "https://cwe.mitre.org/data/definitions/502.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+      "line_number": 133,
+      "line_range": [
+        133
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b301-pickle",
+      "test_id": "B301",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "150     # MD5 is cryptographically broken for password hashing (CWE-327)\n151     hashed = hashlib.md5(new_pass.encode()).hexdigest()\n152     return f\"Password hash stored: {hashed}\"\n",
+      "col_offset": 13,
+      "end_col_offset": 43,
+      "filename": "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 327,
+        "link": "https://cwe.mitre.org/data/definitions/327.html"
+      },
+      "issue_severity": "HIGH",
+      "issue_text": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+      "line_number": 151,
+      "line_range": [
+        151
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html",
+      "test_id": "B324",
+      "test_name": "hashlib"
+    },
+    {
+      "code": "167     # Debug=True exposes interactive debugger to the network (CWE-94 / CVE class)\n168     app.run(debug=True, host=\"0.0.0.0\", port=5000)\n",
+      "col_offset": 4,
+      "end_col_offset": 50,
+      "filename": "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 94,
+        "link": "https://cwe.mitre.org/data/definitions/94.html"
+      },
+      "issue_severity": "HIGH",
+      "issue_text": "A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",
+      "line_number": 168,
+      "line_range": [
+        168
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b201_flask_debug_true.html",
+      "test_id": "B201",
+      "test_name": "flask_debug_true"
+    },
+    {
+      "code": "167     # Debug=True exposes interactive debugger to the network (CWE-94 / CVE class)\n168     app.run(debug=True, host=\"0.0.0.0\", port=5000)\n",
+      "col_offset": 29,
+      "end_col_offset": 38,
+      "filename": "c:\\Users\\sures\\OneDrive\\Desktop\\Samiksha1\\vulnerable_app\\app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 605,
+        "link": "https://cwe.mitre.org/data/definitions/605.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible binding to all interfaces.",
+      "line_number": 168,
+      "line_range": [
+        168
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b104_hardcoded_bind_all_interfaces.html",
+      "test_id": "B104",
+      "test_name": "hardcoded_bind_all_interfaces"
+    }
+  ]
+}

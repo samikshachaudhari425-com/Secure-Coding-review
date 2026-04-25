@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}SecureApp{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0d1117;
+      --surface:  #161b22;
+      --border:   #30363d;
+      --accent:   #238636;
+      --accent-h: #2ea043;
+      --danger:   #da3633;
+      --text:     #c9d1d9;
+      --text-dim: #8b949e;
+      --radius:   10px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    nav .brand span { color: var(--accent); }
+
+    nav .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    nav .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    nav .nav-links a:hover { color: var(--text); }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .card h1, .card h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group { margin-bottom: 1.2rem; }
+
+    .form-group label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      margin-bottom: .4rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .form-group input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .65rem .9rem;
+      color: var(--text);
+      font-size: .95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .form-group input:focus { border-color: var(--accent); }
+
+    .btn {
+      width: 100%;
+      padding: .7rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: .95rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .2s, transform .1s;
+      margin-top: .5rem;
+    }
+    .btn:hover { background: var(--accent-h); }
+    .btn:active { transform: scale(.98); }
+
+    .alert {
+      padding: .75rem 1rem;
+      border-radius: 6px;
+      font-size: .875rem;
+      margin-bottom: 1rem;
+    }
+    .alert-danger { background: rgba(218,54,51,.15); border: 1px solid var(--danger); color: #ff7b72; }
+    .alert-success { background: rgba(35,134,54,.15); border: 1px solid var(--accent); color: #56d364; }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: .75rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Wide card variant */
+    .card-wide { max-width: 900px; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td {
+      padding: .6rem 1rem;
+      text-align: left;
+      font-size: .875rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th { color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: .75rem; }
+    td { color: var(--text); }
+
+    .badge {
+      display: inline-block;
+      padding: .15rem .55rem;
+      border-radius: 20px;
+      font-size: .75rem;
+      font-weight: 600;
+    }
+    .badge-admin { background: rgba(255,166,0,.15); color: #ffa657; border: 1px solid #ffa657; }
+    .badge-user  { background: rgba(35,134,54,.15); color: #56d364; border: 1px solid var(--accent); }
+
+    pre {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem;
+      font-size: .85rem;
+      overflow-x: auto;
+      margin-top: 1rem;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">🔒 <span>Secure</span>App</div>
+    <div class="nav-links">
+      {% if session.user %}
+        <span style="color:var(--text-dim);font-size:.85rem;">{{ session.user }}</span>
+        {% if session.role == 'admin' %}
+          <a href="/admin">Admin</a>
+        {% endif %}
+        <a href="/ping">Ping Tool</a>
+        <a href="/logout">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer>SecureApp &mdash; Secure Coding Review Demo &copy; 2026</footer>
+</body>
+</html>

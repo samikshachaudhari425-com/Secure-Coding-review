@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel – SecureApp{% endblock %}
+{% block content %}
+<div class="card card-wide">
+  <h2>🛡️ Admin Panel</h2>
+  <p style="color:var(--text-dim);font-size:.875rem;margin-bottom:.5rem;">
+    Only <strong>id</strong>, <strong>username</strong>, and <strong>role</strong> are shown.
+    Passwords are never returned — even hashed ones.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.username }}</td>
+        <td>
+          <span class="badge {% if u.role == 'admin' %}badge-admin{% else %}badge-user{% endif %}">
+            {{ u.role }}
+          </span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <br>
+  <a href="/dashboard"><button class="btn" style="width:auto;padding:.6rem 1.5rem;">← Back</button></a>
+</div>
+{% endblock %}

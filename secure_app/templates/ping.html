@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Ping Tool – SecureApp{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>🌐 Ping Tool</h2>
+  <p style="color:var(--text-dim);font-size:.875rem;margin-bottom:1.2rem;">
+    Enter a hostname or IP. Input is validated with an allowlist regex — shell injection is not possible.
+  </p>
+
+  <form method="GET" action="/ping">
+    <div class="form-group">
+      <label for="host">Host / IP Address</label>
+      <input id="host" name="host" type="text" value="{{ request.args.get('host','') }}" placeholder="e.g. 8.8.8.8">
+    </div>
+    <button class="btn" type="submit">Ping →</button>
+  </form>
+
+  {% if output %}
+    <pre>{{ output }}</pre>
+  {% endif %}
+
+  <br>
+  <a href="/dashboard"><button class="btn" style="width:auto;padding:.6rem 1.5rem;background:var(--border);">← Back</button></a>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Dashboard – SecureApp{% endblock %}
+{% block content %}
+<div class="card" style="max-width:580px;">
+  <h2>👋 Welcome, {{ user }}!</h2>
+  <p style="color:var(--text-dim);margin-bottom:2rem;font-size:.9rem;">
+    You are logged in as <strong style="color:var(--text);">{{ session.role }}</strong>.
+    Your session is protected with HttpOnly, SameSite, and Secure cookies.
+  </p>
+
+  <div style="display:grid;gap:1rem;">
+    {% if session.role == 'admin' %}
+    <a href="/admin" style="text-decoration:none;">
+      <div style="background:rgba(255,166,0,.08);border:1px solid #ffa657;border-radius:8px;padding:1rem;">
+        <strong style="color:#ffa657;">🛡️ Admin Panel</strong>
+        <p style="font-size:.8rem;color:var(--text-dim);margin-top:.3rem;">View user accounts (no passwords exposed)</p>
+      </div>
+    </a>
+    {% endif %}
+
+    <a href="/ping" style="text-decoration:none;">
+      <div style="background:rgba(35,134,54,.08);border:1px solid var(--accent);border-radius:8px;padding:1rem;">
+        <strong style="color:#56d364;">🌐 Ping Tool</strong>
+        <p style="font-size:.8rem;color:var(--text-dim);margin-top:.3rem;">Test host connectivity (command injection safe)</p>
+      </div>
+    </a>
+
+    <a href="/logout" style="text-decoration:none;">
+      <div style="background:rgba(218,54,51,.08);border:1px solid var(--danger);border-radius:8px;padding:1rem;">
+        <strong style="color:#ff7b72;">🚪 Logout</strong>
+        <p style="font-size:.8rem;color:var(--text-dim);margin-top:.3rem;">Clear session and return to login</p>
+      </div>
+    </a>
+  </div>
+</div>
+{% endblock %}

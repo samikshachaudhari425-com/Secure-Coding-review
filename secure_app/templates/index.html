@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Home – SecureApp{% endblock %}
+{% block content %}
+<div class="card" style="text-align:center;max-width:520px;">
+  <div style="font-size:3rem;margin-bottom:1rem;">🔐</div>
+  <h1 style="margin-bottom:.75rem;">SecureApp</h1>
+  <p style="color:var(--text-dim);margin-bottom:2rem;font-size:.95rem;line-height:1.6;">
+    A <strong>Python / Flask</strong> application demonstrating
+    secure coding best practices including parameterised queries,
+    bcrypt hashing, CSRF protection, role-based access control, and more.
+  </p>
+  <a href="/login"><button class="btn" style="width:auto;padding:.7rem 2.5rem;">Get Started →</button></a>
+</div>
+{% endblock %}
